@@ -1,27 +1,9 @@
-# ...existing code...
-version: '3.8'
 services:
   python-server:
     build:
       context: ./python-server
       dockerfile: Dockerfile
     ports:
-      - "8000:8000"
+      - 8000:8000
     volumes:
       - ./python-server/src:/app/src
-    environment:
-      - PYTHONUNBUFFERED=1
-
-  node-server:
-    build:
-      context: ./express-js-server
-      dockerfile: Dockerfile
-    ports:
-      - "8001:8001"
-    volumes:
-      - ./express-js-server:/usr/src/app
-      # keep container node_modules isolated to avoid host/container conflicts
-      - /usr/src/app/node_modules
-    depends_on:
-      - python-server
-# ...existing code...
