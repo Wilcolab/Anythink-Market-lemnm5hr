@@ -5,6 +5,7 @@ Simple Express server that listens on port 8001. Use `yarn start` to run with `n
 Run locally:
 
 ```bash
+command -v yarn >/dev/null 2>&1 || npm install -g yarn
 cd js-express-server
 yarn install
 yarn start

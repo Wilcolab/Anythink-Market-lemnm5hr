@@ -12,6 +12,35 @@ The project has the following files and directories:
   ```text
   .
   ├── docker-compose.yml
+  └── node-server
+      ├── Dockerfile
+      ├── package.json
+      ├── package-lock.json
+      └── src
+          └── index.js
+  ```
+
+- Migration notes (Python ➜ Node.js):
+  - Service renamed from python-server to node-server.
+  - FastAPI replaced with Express (Node.js).
+  - API contract preserved:
+    - GET /tasks returns the current task list as JSON.
+    - POST /tasks accepts a JSON body and appends to the list.
+  - Default port remains 8000 (override with PORT env var).
+  - Dependencies moved from requirements.txt to package.json.
+  - Docker base image now Node.js (for example node:18-alpine).
+
+- Development (Node.js):
+  - cd node-server
+  - npm install
+  - npm run dev to run with hot reload, or npm start to run normally.
+
+- Docker:
+  - docker compose up builds and starts the Node.js service.
+  - The service is exposed on port 8000.
+  ```text
+  .
+  ├── docker-compose.yml
   └── python-server
       ├── Dockerfile
       ├── requirements.txt
