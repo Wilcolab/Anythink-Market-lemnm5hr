@@ -81,27 +81,107 @@ describe('Arithmetic', function () {
                 .end(function (err, res) {
                     expect(res.body).to.eql({ result: -2.5 });
                     done();
-                });
-        });
-        it('adds with negative exponent', function (done) {
-            request.get('/arithmetic?operation=add&operand1=1.2e-5&operand2=-1.2e-5')
-                .expect(200)
-                .end(function (err, res) {
-                    expect(res.body).to.eql({ result: 0 });
-                    done();
-                });
-        });
-    });
+                // We recommend installing an extension to run mocha tests.
 
-// TODO: Challenge #1
- 
+                describe('Arithmetic - additional tests', function () {
+                    describe('Validation (additional)', function () {
+                        it('rejects missing operand2', function (done) {
+                            request.get('/arithmetic?operation=add&operand1=21')
+                                .expect(400)
+                                .end(function (err, res) {
+                                    expect(res.body).to.eql({ error: "Invalid operand2: undefined" });
+                                    done();
+                                });
+                        });
 
-    describe('Multiplication', function () {
-        it('multiplies two positive integers', function (done) {
-            request.get('/arithmetic?operation=multiply&operand1=21&operand2=2')
-                .expect(200)
-                .end(function (err, res) {
-                    expect(res.body).to.eql({ result: 42 });
+                        it('rejects empty operand1', function (done) {
+                            request.get('/arithmetic?operation=add&operand1=&operand2=2')
+                                .expect(400)
+                                .end(function (err, res) {
+                                    expect(res.body).to.eql({ error: "Invalid operand1: " });
+                                    done();
+                                });
+                        });
+
+                        it('rejects invalid exponent format', function (done) {
+                            request.get('/arithmetic?operation=add&operand1=1.2e--5&operand2=1')
+                                .expect(400)
+                                .end(function (err, res) {
+                                    expect(res.body).to.eql({ error: "Invalid operand1: 1.2e--5" });
+                                    done();
+                                });
+                        });
+                    });
+
+                    describe('Addition (additional)', function () {
+                        it('adds two positive decimals', function (done) {
+                            request.get('/arithmetic?operation=add&operand1=.5&operand2=0.25')
+                                .expect(200)
+                                .end(function (err, res) {
+                                    expect(res.body).to.eql({ result: 0.75 });
+                                    done();
+                                });
+                        });
+
+                        it('accepts leading plus sign', function (done) {
+                            request.get('/arithmetic?operation=add&operand1=%2B5&operand2=2')
+                                .expect(200)
+                                .end(function (err, res) {
+                                    expect(res.body).to.eql({ result: 7 });
+                                    done();
+                                });
+                        });
+
+                        it('adds using positive exponent notation', function (done) {
+                            request.get('/arithmetic?operation=add&operand1=1.2e3&operand2=300')
+                                .expect(200)
+                                .end(function (err, res) {
+                                    expect(res.body).to.eql({ result: 1500 });
+                                    done();
+                                });
+                        });
+                    });
+
+                    describe('Multiplication (additional)', function () {
+                        it('multiplies by one returns same value', function (done) {
+                            request.get('/arithmetic?operation=multiply&operand1=12345&operand2=1')
+                                .expect(200)
+                                .end(function (err, res) {
+                                    expect(res.body).to.eql({ result: 12345 });
+                                    done();
+                                });
+                        });
+
+                        it('multiplies negative decimal with positive decimal', function (done) {
+                            request.get('/arithmetic?operation=multiply&operand1=-0.2&operand2=0.5')
+                                .expect(200)
+                                .end(function (err, res) {
+                                    expect(res.body).to.eql({ result: -0.1 });
+                                    done();
+                                });
+                        });
+                    });
+
+                    describe('Division (additional)', function () {
+                        it('divides a decimal by a decimal', function (done) {
+                            request.get('/arithmetic?operation=divide&operand1=0.75&operand2=0.25')
+                                .expect(200)
+                                .end(function (err, res) {
+                                    expect(res.body).to.eql({ result: 3 });
+                                    done();
+                                });
+                        });
+
+                        it('divides a positive by a negative decimal', function (done) {
+                            request.get('/arithmetic?operation=divide&operand1=1.5&operand2=-0.5')
+                                .expect(200)
+                                .end(function (err, res) {
+                                    expect(res.body).to.eql({ result: -3 });
+                                    done();
+                                });
+                        });
+                    });
+                });
                     done();
                 });
         });
