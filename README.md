@@ -7,8 +7,20 @@ This project contains a FastAPI server implemented in Python. It provides two ro
 The project has the following files and directories:
 
 - `python-server/src/main.py`: This file contains the implementation of the FastAPI server with two routes. It handles adding a task to a list and retrieving the list.
+- Directory layout:
 
-- `python-server/src/__init__.py`: This file is an empty file that marks the `src` directory as a Python package.
+  ```text
+  .
+  ├── docker-compose.yml
+  └── python-server
+      ├── Dockerfile
+      ├── requirements.txt
+      └── src
+          ├── __init__.py
+          └── main.py
+  ```
+
+- `python-server/src/__init__.py`: This empty file marks the `src` directory as a Python package.
 
 - `python-server/requirements.txt`: This file lists the dependencies required for the FastAPI server and other dependencies.
 
