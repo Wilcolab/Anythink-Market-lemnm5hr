@@ -4,6 +4,22 @@ services:
       context: ./python-server
       dockerfile: Dockerfile
     ports:
-      - 8000:8000
+      - "8000:8000"
     volumes:
       - ./python-server/src:/app/src
+    command: ["uvicorn", "src.main:app", "--reload", "--host", "0.0.0.0", "--port", "8000"]
+    restart: unless-stopped
+
+  node-server:
+    build:
+      context: ./node-server/express-js-server
+      dockerfile: Dockerfile
+    ports:
+      - "8001:8001"
+    volumes:
+      - ./node-server/express-js-server:/usr/src/app
+      - /usr/src/app/node_modules
+    environment:
+      - NODE_ENV=development
+    command: ["yarn", "start"]
+    restart: unless-stopped

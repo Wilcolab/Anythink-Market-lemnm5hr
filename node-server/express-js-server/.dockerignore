@@ -1,0 +1,10 @@
+# This file specifies files and directories to be ignored when building the Docker image.
+node_modules
+yarn-error.log
+*.log
+.DS_Store
+.git
+.gitignore
+README.md
+Dockerfile
+docker-compose.yml
