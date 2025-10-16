@@ -15,4 +15,3 @@ if (!module.parent) {
 }
 
 module.exports = app;
-//Welcome To Wilco, source code is available at https://github.com/wilco/wilco
