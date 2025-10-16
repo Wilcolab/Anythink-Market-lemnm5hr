@@ -1,6 +1,7 @@
 {
   "name": "js-express-server",
   "version": "1.0.0",
+  "description": "A simple Express server listening on port 8001",
   "main": "src/index.js",
   "scripts": {
     "start": "nodemon src/index.js"

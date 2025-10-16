@@ -1,6 +1,22 @@
 # js-express-server
 
-This project is a simple Express server that listens on port 8001. It is set up to use nodemon for automatic code reloading during development.
+Simple Express server that listens on port 8001. Use `yarn start` to run with `nodemon`.
+
+Run locally:
+
+```bash
+cd js-express-server
+yarn install
+yarn start
+```
+
+Endpoints:
+- GET / -> "Hello World"
+- GET /tasks -> { tasks: [...] }
+- POST /tasks -> { "text": "..." }
+# js-express-server
+
+This project is a simple Express server that listens on port 8001. It is set up to automatically restart using Nodemon whenever changes are made to the code.
 
 ## Project Structure
 
@@ -8,52 +24,59 @@ This project is a simple Express server that listens on port 8001. It is set up 
 js-express-server
 ├── src
 │   └── index.js          # Entry point of the application
-├── package.json          # Configuration file for npm
-├── yarn.lock             # Yarn lock file for dependency versions
-├── Dockerfile            # Instructions to build the Docker image
+├── package.json          # npm configuration file
+├── nodemon.json          # Nodemon configuration file
+├── Dockerfile            # Dockerfile for building the server image
 ├── .dockerignore         # Files to ignore when building the Docker image
-├── .gitignore            # Files to ignore by Git
+├── .gitignore            # Files to ignore in Git
 └── README.md             # Project documentation
 ```
 
 ## Getting Started
 
-To set up the project, follow these steps:
+### Prerequisites
 
-1. **Clone the repository:**
+- Node.js and npm installed on your machine.
+- Docker installed on your machine (if you want to run the server in a Docker container).
+
+### Installation
+
+1. Clone the repository:
    ```
    git clone <repository-url>
    cd js-express-server
    ```
 
-2. **Install dependencies:**
+2. Install the dependencies:
    ```
-   yarn install
-   ```
-
-3. **Run the server:**
-   ```
-   yarn start
+   npm install
    ```
 
-The server will start and listen on port 8001.
+### Running the Server
 
-## Docker
+To run the server with Nodemon, use the following command:
+```
+npm start
+```
 
-To build and run the Docker container, use the following commands:
+The server will be accessible at `http://localhost:8001`.
 
-1. **Build the Docker image:**
+### Running with Docker
+
+To build and run the server using Docker, use the following commands:
+
+1. Build the Docker image:
    ```
    docker build -t js-express-server .
    ```
 
-2. **Run the Docker container:**
+2. Run the Docker container:
    ```
    docker run -p 8001:8001 js-express-server
    ```
 
 The server will be accessible at `http://localhost:8001`.
 
-## License
+### License
 
 This project is licensed under the MIT License.
